@@ -16,6 +16,13 @@
 
   <link rel="stylesheet" href="css/main.css">
 
+  <script>
+    // Load and register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./serviceworker.js')
+    }
+  </script>
+
 </head>
 
 <body>
