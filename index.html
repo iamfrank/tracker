@@ -36,7 +36,10 @@
   
   <mood-track></mood-track>
 
-  <script type="module" src="js/main.js"></script>
+  <script type="module">
+    import { Tracker } from './js/tracker.js'
+    customElements.define('mood-track', Tracker)
+  </script>
 
 </body>
 

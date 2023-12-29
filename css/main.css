@@ -66,21 +66,14 @@ button:disabled {
   padding: 1rem;
 }
 
-.moods {
-  flex: 0 1 90%;
-  overflow: auto;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  gap: 0.25rem;
-}
-
-.daily-mood {
-  width: 1rem;
-  height: 1rem;
+.ratebutton {
+  height: 3rem;
+  width: 3rem;
+  padding: 0 0 0.66rem;
+  overflow: hidden;
+  font-size: 3rem;
+  line-height: 1;
+  vertical-align: top;
 }
 
 .moodpicker {
@@ -110,4 +103,32 @@ button:disabled {
 }
 .mood-color-5 {
   background-color: var(--color5);
+}
+
+/* Calendarview */
+
+calendar-view {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  max-height: 100vh;
+}
+
+calendar-view .month { 
+  margin-top: 1rem;
+}
+
+calendar-view p {
+  margin: 0;
+}
+
+calendar-view .days {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 3px;
+}
+
+calendar-view .day {
+  width: 2rem;
+  height: 2rem;
 }

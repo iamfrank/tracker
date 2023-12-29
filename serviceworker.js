@@ -1,9 +1,11 @@
-const cacheName = 'tracker-v1.0'
+const cacheName = 'tracker-v1.3'
 const contentToCache = [
   '/tracker/index.html',
   '/tracker/js/main.js',
   '/tracker/js/db.js',
   '/tracker/js/tracker.js',
+  '/tracker/js/util.js',
+  '/tracker/js/calendar.js',
   '/tracker/css/main.css',
   '/tracker/img/favicon.svg',
   '/tracker/img/mask-icon.svg',

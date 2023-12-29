@@ -1,8 +1,9 @@
 import { getData, addData } from './db.js'
+import { CalendarView } from './calendar.js'
+
+customElements.define('calendar-view', CalendarView)
 
 export class Tracker extends HTMLElement {
-
-
 
   constructor() {
     super()
@@ -13,13 +14,11 @@ export class Tracker extends HTMLElement {
       this.#render(data)
       const lastDaily = this.querySelector('.daily-mood:last-child')
       const rateButton = this.querySelector('.ratebutton')
-      lastDaily.scrollIntoView()
-      if (lastDaily.title === this.#dateToISO(new Date())) {
-        rateButton.disabled = true
-      } else {
-        rateButton.addEventListener('click', this.rateDialogHandler.bind(this))
+      if (lastDaily) {
+        lastDaily.scrollIntoView()
       }
-      this.querySelector('.moodpicker form').addEventListener('submit', this.rateFormHandler.bind(this))
+      rateButton.addEventListener('click', this.rateDialogHandler.bind(this))
+      this.querySelector('.moodpicker form').addEventListener('submit', this.rateHandler.bind(this))
     })
   }
 
@@ -28,16 +27,10 @@ export class Tracker extends HTMLElement {
   }
 
   #render(daylies) {
-    let dom = '<ul class="moods">'
-    daylies.map((daily) => {
-      dom += `<li class="daily-mood mood-color-${daily.mood}" title="${daily.day}"></li>`
-    })
-    dom += `
-      </ul>
+    let dom = `
+      <calendar-view></calendar-view>
       <div class="actionbar">
-        <button class="ratebutton">
-          Rate today
-        </button>
+        <button class="ratebutton" title="Rate your day">+</button>
       </div>
       <dialog class="moodpicker">
         <h2>Rate your day</h2>
@@ -51,18 +44,23 @@ export class Tracker extends HTMLElement {
       </dialog>
     `
     this.innerHTML = dom
+    this.querySelector('calendar-view').data = daylies
   }
 
   rateDialogHandler(event) {
     this.querySelector('.moodpicker').showModal()
   }
 
-  rateFormHandler(event) {
+  rateHandler(event) {
     event.preventDefault()
     this.querySelector('.moodpicker').close()
     addData({
       day: this.#dateToISO(new Date()),
-      mood: event.submitter.value
+      mood: Number(event.submitter.value)
+    }).then(() => {
+      getData().then((data) => {
+        this.querySelector('calendar-view').data = data
+      })
     })
   }
 
