@@ -1,0 +1,113 @@
+:root {
+  --dark: hsl(200, 10%, 5%);
+  --color1: hsl(200,100%,20%);
+  --color2: hsl(200,100%,30%);
+  --color3: hsl(200,100%,40%);
+  --color4: hsl(200,100%,50%);
+  --color5: hsl(200,100%,60%);
+  --light: hsl(200, 100%, 95%);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: var(--dark);
+  color: var(--light);
+  padding: 0;
+  margin: 0;
+  font: 1rem/1.3 monospace;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+}
+
+header {
+  padding: 1rem;
+  flex: 0 1 auto;
+}
+
+mood-track {
+  flex: 1 0 10%;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+}
+
+h1, 
+h2 {
+  color: var(--color5);
+}
+
+header h1 {
+  text-align: center;
+  margin: 0;
+}
+
+button {
+  border: none;
+  background-color: var(--color2);
+  color: var(--light);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font: 1.25rem/1 monospace;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+.actionbar {
+  text-align: center;
+  padding: 1rem;
+}
+
+.moods {
+  flex: 0 1 90%;
+  overflow: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.daily-mood {
+  width: 1rem;
+  height: 1rem;
+}
+
+.moodpicker {
+  background-color: var(--dark);
+  color: var(--light);
+  border: solid 0.25rem var(--color3);
+  padding: 4rem 2rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.moodpicker h2 {
+  margin: 0 0 1rem;
+}
+
+.mood-color-1 {
+  background-color: var(--color1);
+}
+.mood-color-2 {
+  background-color: var(--color2);
+}
+.mood-color-3 {
+  background-color: var(--color3);
+}
+.mood-color-4 {
+  background-color: var(--color4);
+}
+.mood-color-5 {
+  background-color: var(--color5);
+}

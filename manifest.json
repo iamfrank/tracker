@@ -1,0 +1,11 @@
+{
+  "name": "Mood tracer",
+  "short_name": "Tracker",
+  "icons": [{
+      "src": "img/google-touch-icon.png",
+      "sizes": "512x512"
+  }],
+  "background_color": "#021705",
+  "theme_color": "#021705",
+  "display": "fullscreen"
+}
