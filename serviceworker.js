@@ -1,4 +1,4 @@
-const cacheName = 'tracker-v1.5'
+const cacheName = 'tracker-v1.6'
 const contentToCache = [
   '/tracker/index.html',
   '/tracker/js/main.js',
