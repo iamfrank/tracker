@@ -15,13 +15,13 @@ export class CalendarView extends HTMLElement {
   }
 
   #generateCalendarMonth(year, month) {
-    const m = month + 1
-    const daysInMonth = new Date(year, m, 0).getDate()
+    const m = Number(month) + 1
+    const daysInMonth = new Date(year, month, 0).getDate()
     
     // Create a month container
     const monthContainer = document.createElement('div')
     monthContainer.className = 'month'
-    monthContainer.dataset.time = `${year}-${m}`
+    monthContainer.dataset.time = `${year}-${zeroPrefix(m)}`
 
     // Display month and year in the header
     const header = document.createElement('p')
@@ -51,7 +51,7 @@ export class CalendarView extends HTMLElement {
     const currentYear = currentDate.getFullYear()
     const currentMonth = currentDate.getMonth()
 
-    for (let i = 5; i >= 0; i--) {
+    for (let i = 10; i >= 0; i--) {
       this.appendChild(this.#generateCalendarMonth(currentYear, currentMonth - i))
     }
 
@@ -66,16 +66,16 @@ export class CalendarView extends HTMLElement {
       if (scrollTop === 0) {
         // Load older months when scrolling to the top
         const firstMonthEl = this.querySelector('.month:first-child')
-        let earliest = new Date(firstMonthEl.dataset.time)
-        const newMonth = new Date(earliest.setMonth(earliest.getMonth() - 1))
-        this.insertBefore(this.#generateCalendarMonth(newMonth.getUTCFullYear(), newMonth.getMonth()), firstMonthEl)
+        const time = new Date(firstMonthEl.dataset.time)
+        const newTime = new Date(time.getUTCFullYear(), time.getMonth() - 1)
+        this.insertBefore(this.#generateCalendarMonth(newTime.getFullYear(), newTime.getMonth()), firstMonthEl)
         // Adjust scroll position to maintain the display
-        this.scrollTop = 10
-      } else if (scrollTop + clientHeight === scrollHeight) {
+        this.scrollTop = firstMonthEl.scrollHeight
+      } else if (scrollTop + clientHeight >= scrollHeight - 1) { // Hack for Chrome calculation of scrollHeights
         // Load newer months when scrolling to the bottom
-        let latest = new Date(this.querySelector('.month:last-child').dataset.time)
-        const newMonth = new Date(latest.setMonth(latest.getMonth() + 1))
-        this.appendChild(this.#generateCalendarMonth(newMonth.getUTCFullYear(), newMonth.getMonth()))
+        const time = new Date(this.querySelector('.month:last-child').dataset.time)
+        const newTime = new Date(time.getUTCFullYear(), time.getMonth() + 1)
+        this.appendChild(this.#generateCalendarMonth(newTime.getFullYear(), newTime.getMonth()))
       }
     })
 
