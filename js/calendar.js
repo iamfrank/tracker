@@ -16,7 +16,7 @@ export class CalendarView extends HTMLElement {
 
   #generateCalendarMonth(year, month) {
     const m = Number(month) + 1
-    const daysInMonth = new Date(year, month, 0).getDate()
+    const daysInMonth = new Date(year, m, 0).getDate()
     
     // Create a month container
     const monthContainer = document.createElement('div')

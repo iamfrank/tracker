@@ -1,11 +1,12 @@
 :root {
-  --dark: #021705;
-  --color1: hsl(200,100%,20%);
-  --color2: hsl(200,100%,30%);
-  --color3: hsl(200,100%,40%);
-  --color4: hsl(200,100%,50%);
-  --color5: hsl(200,100%,60%);
-  --light: hsl(200, 100%, 95%);
+  --dark: hsl(100,60%,4%);
+  --discrete: hsl(100,60%,8%);
+  --color1: hsl(150,100%,10%);
+  --color2: hsl(125,80%,20%);
+  --color3: hsl(100,60%,30%);
+  --color4: hsl(75,80%,40%);
+  --color5: hsl(50,100%,50%);
+  --light: hsl(100, 100%, 96%);
 }
 
 * {
@@ -112,7 +113,7 @@ mood-track {
   background-color: var(--color5);
 }
 .mood-color-undefined {
-  background-color: hsla(0,0%,50%,0.25)
+  background-color: var(--discrete);
 }
 
 /* Calendarview */
