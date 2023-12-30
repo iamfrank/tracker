@@ -1,2 +1,2 @@
-# tracker
-A daily mood tracker
+# Tracker
+A daily mood tracker.

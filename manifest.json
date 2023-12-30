@@ -1,6 +1,6 @@
 {
   "name": "Mood tracker",
-  "short_name": "Tracker",
+  "short_name": "tracker",
   "icons": [{
       "src": "img/google-touch-icon.png",
       "sizes": "512x512"
