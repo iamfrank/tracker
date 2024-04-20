@@ -18,25 +18,50 @@
 
   <!-- <script src="../js/modules/initsw.js"></script> -->
 
+  <style>
+    th:nth-child(3),
+    td:nth-child(3) {
+      display: none;
+    }
+  </style>
+
 </head>
 
 <body>
 
   <header>
     <h1>
-      <img src="../img/favicon.svg" alt="" style="width: 2rem; height: 2rem;" /> 
-      Observations
+      <img src="../img/favicon.svg" alt="" style="width: 2rem; height: 2rem;"> 
+      Observations: <span class="kpiname"></span>
     </h1>
   </header>
 
   <main>
     <tracker-list db-table="observations" db-key="time"></tracker-list>
-    <a href="observationadd.html?kpi=hest">+ Add</a>
+    <a href="/html/observationadd.html">+ Add</a>
   </main>
+
+  <nav>
+    <a href="/html/observations.html">Table</a>
+    <a href="/html/observationcalendar.html">Calendar</a>
+    <a href="/html/observationchart.html">Chart</a>
+  </nav>
 
   <script type="module">
     import { List } from '../js/components/list.js'
+    import { setKPIname, onElementRender } from '../js/modules/util.js'
+
     customElements.define('tracker-list', List)
+
+    setKPIname()
+
+    function formatTime() {
+      document.querySelectorAll('td:first-child').forEach(function(tdElement) {
+        tdElement.innerText = new Date(Number(tdElement.innerText)).toLocaleDateString()
+      })
+    }
+
+    onElementRender(document.querySelector('tracker-list'), formatTime)
   </script>
 
 </body>

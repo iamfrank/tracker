@@ -22,12 +22,7 @@
 
 <body>
 
-  <header>
-    <h1>
-      <img src="../img/favicon.svg" alt="" style="width: 2rem; height: 2rem;" /> 
-      Add KPI
-    </h1>
-  </header>
+  <tracker-header>Add KPI</tracker-header>
 
   <main>
     <form>
@@ -44,6 +39,9 @@
 
   <script type="module">
     import { addKPI } from '../js/modules/db.js'
+    import { TrackerHeader } from '../js/components/header.js'
+    
+    customElements.define('tracker-header', TrackerHeader)
 
     const formElement = document.querySelector('form')
     formElement.addEventListener('submit', function(event) {

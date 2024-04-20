@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Add observation</title>
+  <title>Observation calendar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="description" content="Mood tracker app by Iamfrank">
 
@@ -22,34 +22,23 @@
 
 <body>
 
-  <tracker-header>Add observation</tracker-header>
+  <tracker-header>Calendar</tracker-header>
 
   <main>
-    <form>
-      <button db-value="0">Bad</button>
-      <button db-value="0.25">Meh</button>
-      <button db-value="0.5">OK</button>
-      <button db-value="0.75">Good</button>
-      <button db-value="1">Perfect</button>
-    </form>
+    
   </main>
 
-  <script type="module">
-    import { addObservation } from '../js/modules/db.js'
-    import { TrackerHeader } from '../js/components/header.js'
-    
-    customElements.define('tracker-header', TrackerHeader)
+  <nav>
+    <a href="/html/observations.html">Table</a>
+    <a href="/html/observationcalendar.html">Calendar</a>
+    <a href="/html/observationchart.html">Chart</a>
+  </nav>
 
-    const formElement = document.querySelector('form')
-    formElement.addEventListener('click', function(event) {
-      event.preventDefault()
-      addObservation({
-        time: new Date().getTime().toString(),
-        rating: event.target.getAttribute('db-value'),
-        kpid: new URLSearchParams(location.search).get('kpi')
-      })
-      location.href = 'observations.html' + location.search
-    })
+  <script type="module">
+    import { setKPIname } from '../js/modules/util.js'
+    import { TrackerHeader } from '../js/components/header.js'
+    customElements.define('tracker-header', TrackerHeader)
+    setKPIname()
   </script>
 
 </body>
