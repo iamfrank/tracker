@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>KPIs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="description" content="Mood tracker app by Iamfrank">
+
+  <!-- Icons and theme colors -->
+  <meta name="theme-color" content="#021705">
+  <link rel="icon" href="../img/favicon.svg">
+  <link rel="mask-icon" href="../img/mask-icon.svg" color="#000000">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+
+  <link rel="stylesheet" href="../css/main.css">
+
+  <!-- <script src="../js/modules/initsw.js"></script> -->
+
+  <style>
+    .colorswatch {
+      height: 1.5rem;
+      width: 1.5rem;
+      border: solid 0.125rem hsla(0,0%,0%,0.3);
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <h1>
+      <img src="../img/favicon.svg" alt="" style="width: 2rem; height: 2rem;" /> 
+      KPIs
+    </h1>
+  </header>
+
+  <main>
+    <tracker-list db-table="kpis" db-key="name"></tracker-list>
+    <a href="kpiadd.html">+ Add</a>
+  </main>
+
+  <script type="module">
+    import { List } from '../js/components/list.js'
+
+    customElements.define('tracker-list', List)
+
+    function colorTableCells() {
+      const regex = /#([0-9]|[a-f]){6}/g
+      document.querySelectorAll('td').forEach(function(tdElement) {
+        console.log('element', tdElement.innerText)
+        if (regex.test(tdElement.innerText)) {
+          console.log('is a hex number', tdElement.innerText)
+          tdElement.innerHTML = `<div class="colorswatch" style="background-color: ${tdElement.innerText};"></div>`
+        }
+      })
+    }
+
+    function checkListRendered() {
+      const listElement = document.querySelector('tracker-list')
+      console.log(listElement)
+      if (listElement.childNodes.length > 0) {
+        colorTableCells()
+      } else {
+        setTimeout(function() {
+          checkListRendered()
+        }, 200)
+      }
+    }
+    
+    checkListRendered()
+
+  </script>
+
+</body>
+
+</html>

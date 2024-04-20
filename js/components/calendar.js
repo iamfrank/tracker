@@ -1,4 +1,4 @@
-import { zeroPrefix } from "./util.js"
+import { zeroPrefix } from "./modules/util.js"
 
 export class CalendarView extends HTMLElement {
 
@@ -33,10 +33,10 @@ export class CalendarView extends HTMLElement {
     days.className = 'days'
     for (let i = 0; i < daysInMonth; i++) {
       const time = `${year}-${zeroPrefix(m)}-${zeroPrefix(i+1)}`
-      const dayData = this.dailyData.find((d) => d.day === time)
+      const dayData = this.dailyData.find((d) => d.time === new Date(time))
       const day = document.createElement('div')
       day.classList.add('day')
-      day.classList.add(`mood-color-${ dayData?.mood }`)
+      day.classList.add(`mood-color-${ dayData?.rating.replace('.', '') }`)
       day.title = time
       days.appendChild(day)
     }

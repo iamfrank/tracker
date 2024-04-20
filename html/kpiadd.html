@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Add KPI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="description" content="Mood tracker app by Iamfrank">
+
+  <!-- Icons and theme colors -->
+  <meta name="theme-color" content="#021705">
+  <link rel="icon" href="../img/favicon.svg">
+  <link rel="mask-icon" href="../img/mask-icon.svg" color="#000000">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+
+  <link rel="stylesheet" href="../css/main.css">
+
+  <!-- <script src="../js/modules/initsw.js"></script> -->
+
+</head>
+
+<body>
+
+  <header>
+    <h1>
+      <img src="../img/favicon.svg" alt="" style="width: 2rem; height: 2rem;" /> 
+      Add KPI
+    </h1>
+  </header>
+
+  <main>
+    <form>
+      <legend>Create a new indicator</legend>
+      <fieldset>
+        <input id="kpiname" type="text" placeholder="Name for indicator">
+      </fieldset>
+      <fieldset>
+        <input id="kpicolor" type="color">
+      </fieldset>
+      <input type="submit" value="Save">
+    </form>
+  </main>
+
+  <script type="module">
+    import { addKPI } from '../js/modules/db.js'
+
+    const formElement = document.querySelector('form')
+    formElement.addEventListener('submit', function(event) {
+      event.preventDefault()
+      addKPI({
+        name: document.querySelector('#kpiname').value,
+        color: document.querySelector('#kpicolor').value
+      })
+      location.href = 'kpis.html'
+    })
+  </script>
+
+</body>
+
+</html>
