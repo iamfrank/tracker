@@ -9,12 +9,12 @@
 
   <!-- Icons and theme colors -->
   <meta name="theme-color" content="#021705">
-  <link rel="icon" href="../img/favicon.svg">
-  <link rel="mask-icon" href="../img/mask-icon.svg" color="#000000">
-  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
-  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" href="/img/favicon.svg">
+  <link rel="mask-icon" href="/img/mask-icon.svg" color="#000000">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
 
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="/css/main.css">
 
   <!-- <script src="../js/modules/initsw.js"></script> -->
 
@@ -45,9 +45,20 @@
     customElements.define('tracker-header', TrackerHeader)
     customElements.define('tracker-list', List)
 
+    function formatTable() {
+      colorTableCells()
+      formatLinks()
+    }
+
+    function formatLinks() {
+      document.querySelectorAll('td:nth-child(1)').forEach(function(tdElement) {
+        tdElement.innerHTML = `<a href="/html/observationchart.html?kpi=${ tdElement.innerText }">${ tdElement.innerText }</a>`
+      })
+    }
+
     function colorTableCells() {
       const regex = /#([0-9]|[a-f]){6}/g
-      document.querySelectorAll('td').forEach(function(tdElement) {
+      document.querySelectorAll('td:nth-child(2)').forEach(function(tdElement) {
         console.log('element', tdElement.innerText)
         if (regex.test(tdElement.innerText)) {
           console.log('is a hex number', tdElement.innerText)
@@ -56,7 +67,7 @@
       })
     }
 
-    onElementRender(document.querySelector('tracker-list'), colorTableCells)
+    onElementRender(document.querySelector('tracker-list'), formatTable)
 
   </script>
 

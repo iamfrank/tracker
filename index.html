@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Mood tracker</title>
+  <title>Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="description" content="Mood tracker app by Iamfrank">
 
@@ -16,7 +16,7 @@
 
   <link rel="stylesheet" href="css/main.css">
 
-  <script src="js/initsw.js"></script>
+  <script src="js/modules/initsw.js"></script>
 
 </head>
 
@@ -24,18 +24,22 @@
 
   <header>
     <h1>
-      <img src="img/favicon.svg" alt="" style="width: 2rem; height: 2rem;" /> 
-      mood tracker
+      <img src="img/favicon.svg" alt="" style="width: 2rem; height: 2rem;"> 
+      Tracker
     </h1>
   </header>
 
   <main>
-    <mood-track></mood-track>
   </main>
 
   <script type="module">
-    import { Tracker } from './js/tracker.js'
-    customElements.define('mood-track', Tracker)
+    import { getData } from './js/modules/db.js'
+
+    const kpis = await getData('kpis')
+    console.log('kpis', kpis)
+    if (kpis[0]) {
+      location.href = `/html/observationchart.html?kpi=${ kpis[0].name }`
+    }
   </script>
 
 </body>
