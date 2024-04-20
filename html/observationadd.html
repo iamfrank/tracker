@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Add observation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="description" content="Mood tracker app by Iamfrank">
+
+  <!-- Icons and theme colors -->
+  <meta name="theme-color" content="#021705">
+  <link rel="icon" href="../img/favicon.svg">
+  <link rel="mask-icon" href="../img/mask-icon.svg" color="#000000">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+
+  <link rel="stylesheet" href="../css/main.css">
+
+  <!-- <script src="../js/modules/initsw.js"></script> -->
+
+</head>
+
+<body>
+
+  <header>
+    <h1>
+      <img src="../img/favicon.svg" alt="" style="width: 2rem; height: 2rem;" /> 
+      Add observation
+    </h1>
+  </header>
+
+  <main>
+    <form>
+      <button db-value="0">Bad</button>
+      <button db-value="0.25">Meh</button>
+      <button db-value="0.5">OK</button>
+      <button db-value="0.75">Good</button>
+      <button db-value="1">Perfect</button>
+    </form>
+  </main>
+
+  <script type="module">
+    import { addObservation } from '../js/modules/db.js'
+
+    const formElement = document.querySelector('form')
+    formElement.addEventListener('click', function(event) {
+      event.preventDefault()
+      addObservation({
+        time: new Date().getTime().toString(),
+        rating: event.target.getAttribute('db-value'),
+        kpid: new URLSearchParams(location.search).get('kpi')
+      })
+      location.href = 'observations.html'
+    })
+  </script>
+
+</body>
+
+</html>

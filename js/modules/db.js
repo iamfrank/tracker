@@ -3,7 +3,7 @@
 import {openDB} from '../../dependencies/idb.js'
 
 const dbName = 'iamfrankTrackerApp'
-const dbVersion = 6
+const dbVersion = 7
 const kpiTableName = 'kpis'
 const observationTableName = 'observations'
 
@@ -26,7 +26,7 @@ function initializeDB() {
         db.createObjectStore(kpiTableName, { keyPath: 'name', unique: true })
       }
       if (!db.objectStoreNames.contains(observationTableName)) {
-        db.createObjectStore(observationTableName, { keyPath: 'time' })
+        db.createObjectStore(observationTableName, { keyPath: 'time', unique: true })
       }
     }
   })
