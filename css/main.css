@@ -1,3 +1,5 @@
+@import './header.css';
+@import './footer.css';
 @import './calendar.css';
 
 :root {
@@ -32,12 +34,6 @@ body {
   align-items: center;
 }
 
-header {
-  max-width: 30rem;
-  padding: 1rem;
-  flex: 0 0 auto;
-}
-
 main {
   max-width: 30rem;
   flex: 1 1 auto;
@@ -48,72 +44,22 @@ h2 {
   color: var(--color5);
 }
 
-header h1 {
-  text-align: center;
-  margin: 0;
-}
-
-button {
+button,
+a.btn {
   border: none;
   background-color: var(--color2);
   color: var(--light);
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   font: 1.25rem/1 monospace;
+  text-decoration: none;
+  display: inline-block;
 }
 
 button:disabled {
   opacity: 0.5;
 }
 
-/* Mood track */
-mood-track {
-  display: block;
-}
-
-.actionbar {
-  text-align: center;
-  padding: 1rem;
-}
-
-.ratebutton {
-  height: 3rem;
-  width: 3rem;
-  padding: 0 0 0.66rem;
-  overflow: hidden;
-  font-size: 3rem;
-  line-height: 1;
-  vertical-align: top;
-}
-
-.moodpicker {
-  background-color: var(--dark);
-  color: var(--light);
-  border: solid 0.25rem var(--color3);
-  padding: 4rem 2rem;
-  border-radius: 1rem;
-  text-align: center;
-}
-
-.moodpicker h2 {
-  margin: 0 0 1rem;
-}
-
-.mood-color-1 {
-  background-color: var(--color1);
-}
-.mood-color-2 {
-  background-color: var(--color2);
-}
-.mood-color-3 {
-  background-color: var(--color3);
-}
-.mood-color-4 {
-  background-color: var(--color4);
-}
-.mood-color-5 {
-  background-color: var(--color5);
-}
-.mood-color-undefined {
-  background-color: var(--discrete);
+svg.icon-light path{
+  fill: var(--light);
 }

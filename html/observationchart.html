@@ -28,16 +28,15 @@
     
   </main>
 
-  <nav>
-    <a href="/html/observations.html">Table</a>
-    <a href="/html/observationcalendar.html">Calendar</a>
-    <a href="/html/observationchart.html">Chart</a>
-  </nav>
+  <tracker-footer></tracker-footer>
 
   <script type="module">
     import { setKPIname } from '../js/modules/util.js'
     import { TrackerHeader } from '../js/components/header.js'
+    import { TrackerFooter } from '../js/components/footer.js'
+    
     customElements.define('tracker-header', TrackerHeader)
+    customElements.define('tracker-footer', TrackerFooter)
     setKPIname()
   </script>
 
