@@ -1,0 +1,28 @@
+.dialog-add {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-add > article {
+  border: solid 0.25rem var(--color1);
+  border-radius: 0.5rem;
+  padding: 2rem;
+}
+
+.dialog-add > article header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dialog-add > article h1 {
+  margin: 0;
+}
+
+.dialog-add > article form {
+  margin: 2rem 0 0;
+}

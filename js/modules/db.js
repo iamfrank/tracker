@@ -3,7 +3,7 @@
 import {openDB} from '../../dependencies/idb.js'
 
 const dbName = 'iamfrankTrackerApp'
-const dbVersion = 8
+const dbVersion = 11
 const kpiTableName = 'kpis'
 const observationTableName = 'observations'
 
@@ -23,7 +23,7 @@ function initializeDB() {
       // Creates store if none exist
       // Checks if the object store exists:
       if (!db.objectStoreNames.contains(kpiTableName)) {
-        db.createObjectStore(kpiTableName, { keyPath: 'name', unique: true })
+        db.createObjectStore(kpiTableName, { keyPath: 'id', autoIncrement: true })
       }
       if (!db.objectStoreNames.contains(observationTableName)) {
         db.createObjectStore(observationTableName, { keyPath: 'time', unique: true })
@@ -42,15 +42,39 @@ async function addKPI(kpi) {
   await db.add(kpiTableName, kpi)
 }
 
-async function getKPI(name) {
+async function getKPI(id) {
   const db = await initializeDB()
-  const kpi = await db.get(kpiTableName, name)
+  const kpi = await db.get(kpiTableName, id)
   return kpi
 }
 
 async function delData(table, item) {
+  console.log('deleting', item)
   const db = await initializeDB()
-  await db.delete(table, item)
+  // If item is KPI, clean up observations related to it
+  if (table === kpiTableName) {
+    await delRelatedData(db, item)
+    await db.delete(table, Number(item))
+  } else {
+    await db.delete(table, item)
+  }
+  return true
+}
+
+async function delRelatedData(database, item) {
+
+  const tx = await database.transaction(observationTableName, 'readwrite')
+  let promises = []
+  let cursor = await tx.store.openCursor()
+  while (cursor) {
+    if (cursor.value.kpid === item) {
+      promises.push(tx.store.delete(cursor.key))
+    }
+    cursor = await cursor.continue()
+  }
+
+  await Promise.all([...promises, tx.done])
+  return true
 }
 
 async function getData(table, kpi = false) {
@@ -84,14 +108,18 @@ async function getData(table, kpi = false) {
 
 /**
  * Add observation data to DB
- * @param {string} observation.kpid Corresponding KPI ID
+ * @param {number} observation.kpid Corresponding KPI ID
  * @param {Date} observation.time Time of observation
  * @param {number} observation.rating Obervation rating value
  * @returns 
  */
 async function addObservation(observation) {
   const db = await initializeDB()
-  await db.add(observationTableName, observation)
+  const result = await db.add(observationTableName, observation)
+  console.log(result)
+  if (!result) {
+    alert('You cannot enter more ratings for this indicator today.')
+  }
 }
 
 async function getObservation(time) {

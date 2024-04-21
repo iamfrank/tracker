@@ -34,7 +34,7 @@
   <tracker-footer></tracker-footer>
 
   <script type="module">
-    import { getData } from '../js/modules/db.js'
+    import { getData, getKPI } from '../js/modules/db.js'
     import { setKPIname } from '../js/modules/util.js'
     import { CalendarView } from '../js/components/calendar.js'
     import { TrackerHeader } from '../js/components/header.js'
@@ -43,10 +43,8 @@
     customElements.define('tracker-footer', TrackerFooter)
     customElements.define('tracker-header', TrackerHeader)
     customElements.define('tracker-calendar', CalendarView)
-    setKPIname()
-
-    const kpi = new URLSearchParams(location.search).get('kpi')
-    getData('observations', kpi).then((obsData) => {
+    
+    getData('observations', Number(localStorage.getItem('kpid'))).then((obsData) => {
       document.querySelector('tracker-calendar').data = obsData
     })
 

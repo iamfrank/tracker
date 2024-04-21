@@ -20,11 +20,18 @@
 
 </head>
 
-<body>
+<body class="dialog-add">
 
-  <tracker-header>Add KPI</tracker-header>
+  <article>
 
-  <main>
+    <header>
+      <h1>Add KPI</h1>
+
+      <button title="Close">
+        <svg class="icon-light" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+      </button>
+    </header>
+  
     <form>
       <legend>Create a new indicator</legend>
       <fieldset>
@@ -35,22 +42,25 @@
       </fieldset>
       <input type="submit" value="Save">
     </form>
-  </main>
+  
+  </article>
 
   <script type="module">
     import { addKPI } from '../js/modules/db.js'
-    import { TrackerHeader } from '../js/components/header.js'
-    
-    customElements.define('tracker-header', TrackerHeader)
 
     const formElement = document.querySelector('form')
     formElement.addEventListener('submit', function(event) {
       event.preventDefault()
       addKPI({
         name: document.querySelector('#kpiname').value,
-        color: document.querySelector('#kpicolor').value
+        color: document.querySelector('#kpicolor').value,
+        type: 'fivepoint'
       })
       location.href = 'kpis.html'
+    })
+
+    document.querySelector('button[title="Close"]').addEventListener('click', (event) => {
+      history.back()
     })
   </script>
 

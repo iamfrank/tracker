@@ -1,0 +1,24 @@
+tracker-list p {
+  margin: 0;
+  text-align: right;
+}
+
+tracker-list table {
+  width: 100%;
+}
+
+tracker-list.editmode .edit-on,
+tracker-list .edit-off,
+tracker-list .btn-del {
+  display: none;
+}
+
+tracker-list .edit-on,
+tracker-list.editmode .edit-off,
+tracker-list.editmode .btn-del {
+  display: inline-block;
+}
+
+tracker-list .btn-del {
+  background-color: var(--danger);
+}

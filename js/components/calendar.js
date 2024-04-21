@@ -34,7 +34,7 @@ export class CalendarView extends HTMLElement {
     for (let i = 0; i < daysInMonth; i++) {
       const time = `${year}-${zeroPrefix(m)}-${zeroPrefix(i+1)}`
       const dayData = this.dailyData.find((d) => {
-        return this.#toShortISOString(new Date(Number(d.time))) === time
+        return d.time === time
       })
       const day = document.createElement('div')
       day.classList.add('day')
@@ -45,10 +45,6 @@ export class CalendarView extends HTMLElement {
     monthContainer.appendChild(days)
 
     return monthContainer
-  }
-
-  #toShortISOString(dateObj) {
-    return dateObj.toISOString().substring(0,10)
   }
 
   // Function to initialize the calendar with the latest 6 months

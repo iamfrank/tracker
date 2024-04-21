@@ -42,23 +42,16 @@
 
   <script type="module">
     import { List } from '../js/components/list.js'
-    import { setKPIname, onElementRender } from '../js/modules/util.js'
+    import { onElementRender } from '../js/modules/util.js'
     import { TrackerHeader } from '../js/components/header.js'
     import { TrackerFooter } from '../js/components/footer.js'
+    import { ButtonDelete } from '../js/components/button-delete.js'
     
     customElements.define('tracker-header', TrackerHeader)
     customElements.define('tracker-footer', TrackerFooter)
     customElements.define('tracker-list', List)
+    customElements.define('tracker-button-delete', ButtonDelete)
 
-    setKPIname()
-
-    function formatTime() {
-      document.querySelectorAll('td:first-child').forEach(function(tdElement) {
-        tdElement.innerText = new Date(Number(tdElement.innerText)).toLocaleDateString()
-      })
-    }
-
-    onElementRender(document.querySelector('tracker-list'), formatTime)
   </script>
 
 </body>

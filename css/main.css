@@ -1,6 +1,8 @@
 @import './header.css';
 @import './footer.css';
 @import './calendar.css';
+@import './list.css';
+@import './dialog.css';
 
 :root {
   --dark: hsl(100,60%,4%);
@@ -11,6 +13,7 @@
   --color4: hsl(75,80%,40%);
   --color5: hsl(50,100%,50%);
   --light: hsl(100, 100%, 96%);
+  --danger: hsl(25, 100%, 20%);
 }
 
 * {
@@ -35,6 +38,7 @@ body {
 }
 
 main {
+  width: 100%;
   max-width: 30rem;
   flex: 1 1 auto;
 }
@@ -60,6 +64,24 @@ button:disabled {
   opacity: 0.5;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+}
+
+th,
+td {
+  padding: 0.25rem 0.75rem 0.25rem 0;
+}
+
+tr:nth-child(even) td {
+  background-color: hsla(0,0%,100%,0.1);
+}
+
+/* SVG */
 svg.icon-light path{
   fill: var(--light);
 }
