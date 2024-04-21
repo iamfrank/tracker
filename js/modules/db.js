@@ -3,7 +3,7 @@
 import {openDB} from '../../dependencies/idb.js'
 
 const dbName = 'iamfrankTrackerApp'
-const dbVersion = 7
+const dbVersion = 8
 const kpiTableName = 'kpis'
 const observationTableName = 'observations'
 
@@ -53,10 +53,33 @@ async function delData(table, item) {
   await db.delete(table, item)
 }
 
-async function getData(table) {
-  const db = await initializeDB()
-  const allData = await db.getAll(table)
-  return allData
+async function getData(table, kpi = false) {
+  if (!kpi) {
+
+    // Returns all data in table
+    const db = await initializeDB()
+    const allData = await db.getAll(table)
+    return allData
+
+  } else {
+
+    // Returns table objects filterede på kpi name
+    const db = await initializeDB()
+    const tx = await db.transaction(table, 'readonly')
+    // Open a cursor on the designated object store:
+    let cursor = await tx.store.openCursor()
+    let filteredData = []
+    while (cursor) {
+      // Show the data in the row at the current cursor position:
+      if (cursor.value.kpid === kpi) {
+        filteredData.push(cursor.value)
+      }
+      // Advance the cursor to the next row:
+      cursor = await cursor.continue()
+    }
+    return filteredData
+
+  }
 }
 
 /**

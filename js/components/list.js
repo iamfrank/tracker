@@ -15,7 +15,8 @@ export class List extends HTMLElement {
   }
 
   async render() {
-    const list = await getData(this.getAttribute('db-table'))
+    const kpiname = location.pathname === '/html/kpis.html' ? false : new URLSearchParams(location.search).get('kpi')
+    const list = await getData(this.getAttribute('db-table'), kpiname)
     this.innerHTML = `
       <table>
         <thead>

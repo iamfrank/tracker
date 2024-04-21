@@ -43,13 +43,9 @@
     customElements.define('tracker-calendar', CalendarView)
     setKPIname()
 
-    getData('observations').then((obsData) => {
-
-      const kpi = new URLSearchParams(location.search).get('kpi')
-      const filteredData = obsData.filter((obs) => obs.kpid === kpi)
-      console.log('obsData', filteredData)
-      document.querySelector('tracker-calendar').data = filteredData
-
+    const kpi = new URLSearchParams(location.search).get('kpi')
+    getData('observations', kpi).then((obsData) => {
+      document.querySelector('tracker-calendar').data = obsData
     })
 
   </script>
