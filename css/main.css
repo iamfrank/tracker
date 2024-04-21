@@ -1,3 +1,5 @@
+@import './calendar.css';
+
 :root {
   --dark: hsl(100,60%,4%);
   --discrete: hsl(100,60%,8%);
@@ -114,34 +116,4 @@ mood-track {
 }
 .mood-color-undefined {
   background-color: var(--discrete);
-}
-
-/* Calendarview */
-
-calendar-view {
-  display: block;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  height: auto;
-  max-height: calc(100vh - 10rem);
-  max-width: 100%;
-}
-
-calendar-view .month { 
-  margin-top: 1rem;
-}
-
-calendar-view p {
-  margin: 0;
-}
-
-calendar-view .days {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 0.25rem;
-}
-
-calendar-view .day {
-  width: 2rem;
-  height: 2rem;
 }

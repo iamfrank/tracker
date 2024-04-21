@@ -1,0 +1,49 @@
+/* Calendarview */
+
+tracker-calendar {
+  display: block;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: auto;
+  max-height: calc(100vh - 10rem);
+  max-width: 100%;
+}
+
+tracker-calendar .month { 
+  margin-top: 1rem;
+}
+
+tracker-calendar p {
+  margin: 0;
+}
+
+tracker-calendar .days {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.25rem;
+}
+
+tracker-calendar .day {
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+tracker-calendar .mood-color-0 {
+  background-color: var(--color1);
+}
+tracker-calendar .mood-color-025 {
+  background-color: var(--color2);
+}
+tracker-calendar .mood-color-05 {
+  background-color: var(--color3);
+}
+tracker-calendar .mood-color-075 {
+  background-color: var(--color4);
+}
+tracker-calendar .mood-color-1 {
+  background-color: var(--color5);
+}
+tracker-calendar .mood-color-undefined {
+  background-color: var(--discrete);
+}

@@ -25,7 +25,7 @@
   <tracker-header>Calendar</tracker-header>
 
   <main>
-    
+    <tracker-calendar></tracker-calendar>
   </main>
 
   <nav>
@@ -35,10 +35,23 @@
   </nav>
 
   <script type="module">
+    import { getData } from '../js/modules/db.js'
     import { setKPIname } from '../js/modules/util.js'
     import { TrackerHeader } from '../js/components/header.js'
+    import { CalendarView } from '../js/components/calendar.js'
     customElements.define('tracker-header', TrackerHeader)
+    customElements.define('tracker-calendar', CalendarView)
     setKPIname()
+
+    getData('observations').then((obsData) => {
+
+      const kpi = new URLSearchParams(location.search).get('kpi')
+      const filteredData = obsData.filter((obs) => obs.kpid === kpi)
+      console.log('obsData', filteredData)
+      document.querySelector('tracker-calendar').data = filteredData
+
+    })
+
   </script>
 
 </body>

@@ -1,4 +1,4 @@
-import { zeroPrefix } from "./modules/util.js"
+import { zeroPrefix } from "../modules/util.js"
 
 export class CalendarView extends HTMLElement {
 
@@ -33,7 +33,9 @@ export class CalendarView extends HTMLElement {
     days.className = 'days'
     for (let i = 0; i < daysInMonth; i++) {
       const time = `${year}-${zeroPrefix(m)}-${zeroPrefix(i+1)}`
-      const dayData = this.dailyData.find((d) => d.time === new Date(time))
+      const dayData = this.dailyData.find((d) => {
+        return this.#toShortISOString(new Date(Number(d.time))) === time
+      })
       const day = document.createElement('div')
       day.classList.add('day')
       day.classList.add(`mood-color-${ dayData?.rating.replace('.', '') }`)
@@ -43,6 +45,10 @@ export class CalendarView extends HTMLElement {
     monthContainer.appendChild(days)
 
     return monthContainer
+  }
+
+  #toShortISOString(dateObj) {
+    return dateObj.toISOString().substring(0,10)
   }
 
   // Function to initialize the calendar with the latest 6 months
