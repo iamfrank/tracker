@@ -19,10 +19,20 @@
   <!-- <script src="../js/modules/initsw.js"></script> -->
 
   <style>
-    .colorswatch {
-      height: 1.5rem;
-      width: 1.5rem;
-      border: solid 0.125rem hsla(0,0%,0%,0.3);
+    tracker-kpi-list {
+      height: 100%;
+      width: 100%;
+      max-width: 30rem;
+      display: flex;
+      flex-flow: column nowrap;
+    }
+    tracker-kpi-list th:nth-child(2),
+    tracker-kpi-list th:nth-child(3),
+    tracker-kpi-list th:nth-child(4),
+    tracker-kpi-list td:nth-child(2),
+    tracker-kpi-list td:nth-child(3),
+    tracker-kpi-list td:nth-child(4) {
+      display: none;
     }
   </style>
 
@@ -30,55 +40,21 @@
 
 <body>
 
-  <tracker-header>KPIs</tracker-header>
-
-  <main>
-    <tracker-list db-table="kpis" db-key="id"></tracker-list>
-    <a class="btn" href="kpiadd.html" title="Add">
-      <svg class="icon-light" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M450.001-450.001h-200q-12.75 0-21.375-8.628-8.625-8.629-8.625-21.384 0-12.756 8.625-21.371 8.625-8.615 21.375-8.615h200v-200q0-12.75 8.628-21.375 8.629-8.625 21.384-8.625 12.756 0 21.371 8.625 8.615 8.625 8.615 21.375v200h200q12.75 0 21.375 8.628 8.625 8.629 8.625 21.384 0 12.756-8.625 21.371-8.625 8.615-21.375 8.615h-200v200q0 12.75-8.628 21.375-8.629 8.625-21.384 8.625-12.756 0-21.371-8.625-8.615-8.625-8.615-21.375v-200Z"/></svg>
-    </a>
-  </main>
-
-  <tracker-footer></tracker-footer>
-
+  <tracker-kpi-list></tracker-kpi-list>
+  
   <script type="module">
+    
+    import { KPIList } from '../js/views/kpis.js'
     import { List } from '../js/components/list.js'
-    import { onElementRender } from '../js/modules/util.js'
     import { TrackerHeader } from '../js/components/header.js'
     import { TrackerFooter } from '../js/components/footer.js'
     import { ButtonDelete } from '../js/components/button-delete.js'
     
+    customElements.define('tracker-kpi-list', KPIList)
     customElements.define('tracker-header', TrackerHeader)
     customElements.define('tracker-footer', TrackerFooter)
     customElements.define('tracker-list', List)
     customElements.define('tracker-button-delete', ButtonDelete)
-
-    function formatTable() {
-      colorTableCells()
-      formatLinks()
-    }
-
-    function formatLinks() {
-      document.querySelectorAll('tbody tr').forEach(function(trElement) {
-        trElement.addEventListener('click', function(event) {
-          localStorage.setItem('kpid', Number(trElement.getAttribute('db-item')))
-          location.href = '/html/observationcalendar.html'
-        })
-      })
-    }
-
-    function colorTableCells() {
-      const regex = /#([0-9]|[a-f]){6}/g
-      document.querySelectorAll('td:nth-child(2)').forEach(function(tdElement) {
-        console.log('element', tdElement.innerText)
-        if (regex.test(tdElement.innerText)) {
-          console.log('is a hex number', tdElement.innerText)
-          tdElement.innerHTML = `<div class="colorswatch" style="background-color: ${tdElement.innerText};"></div>`
-        }
-      })
-    }
-
-    onElementRender(document.querySelector('tracker-list'), formatTable)
 
   </script>
 

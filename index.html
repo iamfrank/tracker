@@ -18,6 +18,20 @@
 
   <script src="js/modules/initsw.js"></script>
 
+  <script type="module">
+    import { getData } from './js/modules/db.js'
+
+    const kpid = localStorage.getItem('kpid')
+    if (kpid) {
+      location.href = '/html/observationcalendar.html'
+    } else {
+      const kpis = await getData('kpis')
+      if (kpis[0]) {
+        location.href = '/html/observationcalendar.html'
+      }
+    }
+  </script>
+
 </head>
 
 <body>
@@ -40,20 +54,6 @@
       </a>
     </p>
   </main>
-
-  <script type="module">
-    import { getData } from './js/modules/db.js'
-
-    const kpid = localStorage.getItem('kpid')
-    if (kpid) {
-      location.href = '/html/observations.html'
-    } else {
-      const kpis = await getData('kpis')
-      if (kpis[0]) {
-        location.href = '/html/observations.html'
-      }
-    }
-  </script>
 
 </body>
 

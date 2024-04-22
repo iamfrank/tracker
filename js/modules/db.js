@@ -49,21 +49,15 @@ async function getKPI(id) {
 }
 
 async function delData(table, item) {
-  console.log('deleting', item)
   const db = await initializeDB()
-  // If item is KPI, clean up observations related to it
-  if (table === kpiTableName) {
-    await delRelatedData(db, item)
-    await db.delete(table, Number(item))
-  } else {
-    await db.delete(table, item)
-  }
+  await db.delete(table, item)
   return true
 }
 
-async function delRelatedData(database, item) {
+async function delKPIRelatedData(item) {
 
-  const tx = await database.transaction(observationTableName, 'readwrite')
+  const db = await initializeDB()
+  const tx = await db.transaction(observationTableName, 'readwrite')
   let promises = []
   let cursor = await tx.store.openCursor()
   while (cursor) {
@@ -77,32 +71,35 @@ async function delRelatedData(database, item) {
   return true
 }
 
-async function getData(table, kpi = false) {
-  if (!kpi) {
+async function getKPIList() {
+  const db = await initializeDB()
+  const allData = await db.getAll(kpiTableName)
+  return allData
+}
 
-    // Returns all data in table
+async function getObservationList (kpi, getAll = false) {
+  if (!getAll) {
+    // Returns table objects filterede by kpi id
     const db = await initializeDB()
-    const allData = await db.getAll(table)
-    return allData
-
-  } else {
-
-    // Returns table objects filterede på kpi name
-    const db = await initializeDB()
-    const tx = await db.transaction(table, 'readonly')
+    const tx = await db.transaction(observationTableName, 'readonly')
     // Open a cursor on the designated object store:
     let cursor = await tx.store.openCursor()
     let filteredData = []
     while (cursor) {
       // Show the data in the row at the current cursor position:
-      if (cursor.value.kpid === kpi) {
+      console.log('comparing', cursor.value.kpid, Number(kpi))
+      if (cursor.value.kpid === Number(kpi)) {
         filteredData.push(cursor.value)
       }
       // Advance the cursor to the next row:
       cursor = await cursor.continue()
     }
     return filteredData
-
+  } else {
+    // Returns all data in table
+    const db = await initializeDB()
+    const allData = await db.getAll(observationTableName)
+    return allData    
   }
 }
 
@@ -129,10 +126,14 @@ async function getObservation(time) {
 }
 
 export {
+  delData,
+
   addKPI,
   getKPI,
+  getKPIList,
+
   addObservation,
   getObservation,
-  delData,
-  getData
+  delKPIRelatedData,
+  getObservationList
 }
