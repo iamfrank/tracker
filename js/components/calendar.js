@@ -38,7 +38,7 @@ export class CalendarView extends HTMLElement {
       })
       const day = document.createElement('div')
       day.classList.add('day')
-      day.classList.add(`mood-color-${ dayData?.rating.replace('.', '') }`)
+      day.classList.add(`mood-color-${ dayData?.rating.toString().replace('.', '') }`)
       day.title = time
       days.appendChild(day)
     }

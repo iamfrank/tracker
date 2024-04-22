@@ -8,7 +8,7 @@ export class TrackerHeader extends HTMLElement {
     this.render()
   }
 
-  async render() {
+  render() {
     const title = this.innerText
     this.innerHTML = `
       <header>

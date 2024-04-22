@@ -27,7 +27,9 @@
       flex-flow: column nowrap;
     }
     tracker-observation-list th:nth-child(3),
-    tracker-observation-list td:nth-child(3) {
+    tracker-observation-list td:nth-child(3),
+    tracker-observation-list th:nth-child(4),
+    tracker-observation-list td:nth-child(4) {
       display: none;
     }
   </style>
@@ -43,13 +45,11 @@
     import { List } from '../js/components/list.js'
     import { TrackerHeader } from '../js/components/header.js'
     import { TrackerFooter } from '../js/components/footer.js'
-    import { ButtonDelete } from '../js/components/button-delete.js'
     
     customElements.define('tracker-observation-list', ObservationList)
     customElements.define('tracker-header', TrackerHeader)
     customElements.define('tracker-footer', TrackerFooter)
     customElements.define('tracker-list', List)
-    customElements.define('tracker-button-delete', ButtonDelete)
   </script>
 
 </body>

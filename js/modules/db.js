@@ -3,7 +3,7 @@
 import {openDB} from '../../dependencies/idb.js'
 
 const dbName = 'iamfrankTrackerApp'
-const dbVersion = 11
+const dbVersion = 14
 const kpiTableName = 'kpis'
 const observationTableName = 'observations'
 
@@ -26,7 +26,7 @@ function initializeDB() {
         db.createObjectStore(kpiTableName, { keyPath: 'id', autoIncrement: true })
       }
       if (!db.objectStoreNames.contains(observationTableName)) {
-        db.createObjectStore(observationTableName, { keyPath: 'time', unique: true })
+        db.createObjectStore(observationTableName, { keyPath: 'id', autoIncrement: true })
       }
     }
   })
@@ -106,7 +106,7 @@ async function getObservationList (kpi, getAll = false) {
 /**
  * Add observation data to DB
  * @param {number} observation.kpid Corresponding KPI ID
- * @param {Date} observation.time Time of observation
+ * @param {String} observation.time Time of observation in the format 'YYYY-MM-DD', ie. 2020-12-31
  * @param {number} observation.rating Obervation rating value
  * @returns 
  */

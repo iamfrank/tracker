@@ -1,8 +1,10 @@
 import { getObservationList } from '../modules/db.js'
+import { getLocalStorageKPI } from '../modules/util.js'
 
 export class ObservationCalendar extends HTMLElement {
 
   listData
+  listTitle
 
   constructor() {
     super()
@@ -13,13 +15,15 @@ export class ObservationCalendar extends HTMLElement {
   }
 
   async update() {
+    const kpi = await getLocalStorageKPI()
+    this.listTitle = kpi.name
     this.listData = await getObservationList(localStorage.getItem('kpid'))
     this.render()
   }
 
   render() {
     this.innerHTML = `
-      <tracker-header>Calendar</tracker-header>
+      <tracker-header>${ this.listTitle } calendar</tracker-header>
 
       <main>
         <tracker-calendar></tracker-calendar>

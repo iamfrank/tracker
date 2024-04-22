@@ -55,10 +55,10 @@
         event.preventDefault()
         addObservation({
           time: localDate(new Date()),
-          rating: event.target.getAttribute('db-value'),
+          rating: Number(event.target.getAttribute('db-value')),
           kpid: kpi.id
         })
-        location.href = './observations.html' + location.search
+        location.href = './observationcalendar.html'
       })
     })
     document.querySelector('button[title="Close"]').addEventListener('click', (event) => {

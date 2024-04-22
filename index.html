@@ -16,16 +16,16 @@
 
   <link rel="stylesheet" href="./css/main.css">
 
-  <script src="./js/modules/initsw.js"></script>
+  <!-- <script src="./js/modules/initsw.js"></script> -->
 
   <script type="module">
-    import { getData } from './js/modules/db.js'
+    import { getKPIList } from './js/modules/db.js'
 
     const kpid = localStorage.getItem('kpid')
     if (kpid) {
       location.href = './html/observationcalendar.html'
     } else {
-      const kpis = await getData('kpis')
+      const kpis = await getKPIList
       if (kpis[0]) {
         location.href = './html/observationcalendar.html'
       }
