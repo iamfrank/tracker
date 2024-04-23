@@ -11,19 +11,20 @@ export class ObservationCalendar extends HTMLElement {
   }
 
   connectedCallback() {
-    this.update() 
+    this.update()
+
+    this.addEventListener('tracker:update', this.update.bind(this))
   }
 
   async update() {
-    const kpi = await getLocalStorageKPI()
-    this.listTitle = kpi.name
+    console.log('updating with kpi', localStorage.getItem('kpid'))
     this.listData = await getObservationList(localStorage.getItem('kpid'))
     this.render()
   }
 
   render() {
     this.innerHTML = `
-      <tracker-header>${ this.listTitle } calendar</tracker-header>
+      <tracker-header data-selectable="true">calendar</tracker-header>
 
       <main>
         <tracker-calendar></tracker-calendar>

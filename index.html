@@ -16,10 +16,13 @@
 
   <link rel="stylesheet" href="./css/main.css">
 
-  <script src="./js/modules/initsw.js"></script>
-
   <script type="module">
     import { getKPIList } from './js/modules/db.js'
+
+    // Load and register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./serviceworker.js')
+    }
 
     const kpid = localStorage.getItem('kpid')
     if (kpid) {
@@ -36,12 +39,7 @@
 
 <body>
 
-  <header>
-    <h1>
-      <img src="img/favicon.svg" alt="" style="width: 2rem; height: 2rem;"> 
-      Tracker
-    </h1>
-  </header>
+  <tracker-header>Tracker</tracker-header>
 
   <main>
     <p>
@@ -54,6 +52,11 @@
       </a>
     </p>
   </main>
+
+  <script type="module">
+    import { TrackerHeader } from './js/components/header.js'
+    customElements.define('tracker-header', TrackerHeader)
+  </script>
 
 </body>
 

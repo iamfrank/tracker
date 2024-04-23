@@ -4,7 +4,6 @@ import { getLocalStorageKPI } from '../modules/util.js'
 export class ObservationList extends HTMLElement {
 
   listData
-  listTitle
 
   constructor() {
     super()
@@ -12,18 +11,18 @@ export class ObservationList extends HTMLElement {
 
   connectedCallback() {
     this.update() 
+
+    this.addEventListener('tracker:update', this.update.bind(this))
   }
 
   async update() {
-    const kpi = await getLocalStorageKPI()
-    this.listTitle = kpi.name
     this.listData = await getObservationList(localStorage.getItem('kpid'))
     this.render()
   }
 
   render() {
     this.innerHTML = `
-      <tracker-header>${ this.listTitle } observations</tracker-header>
+      <tracker-header data-selectable="true">observations</tracker-header>
 
       <main>
         <tracker-list></tracker-list>

@@ -1,9 +1,8 @@
-const cacheName = 'mood-tracker-v2'
+const cacheName = 'mood-tracker-v2.13'
 const contentToCache = [
   '/tracker/index.html',
   '/tracker/js/modules/db.js',
   '/tracker/js/modules/util.js',
-  '/tracker/js/modules/initsw.js',
   '/tracker/js/components/tracker.js',
   '/tracker/js/components/calendar.js',
   '/tracker/js/components/footer.js',

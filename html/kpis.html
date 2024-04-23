@@ -16,7 +16,12 @@
 
   <link rel="stylesheet" href="../css/main.css">
 
-  <script src="../js/modules/initsw.js"></script>
+  <script>
+    // Load and register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../serviceworker.js')
+    }
+  </script>
 
   <style>
     tracker-kpi-list {
@@ -25,6 +30,12 @@
       max-width: 30rem;
       display: flex;
       flex-flow: column nowrap;
+    }
+    tracker-kpi-list header {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
     }
     tracker-kpi-list th:nth-child(2),
     tracker-kpi-list th:nth-child(3),

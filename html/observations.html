@@ -16,7 +16,12 @@
 
   <link rel="stylesheet" href="../css/main.css">
 
-  <script src="../js/modules/initsw.js"></script>
+  <script>
+    // Load and register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../serviceworker.js')
+    }
+  </script>
 
   <style>
     tracker-observation-list {
