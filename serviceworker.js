@@ -1,15 +1,34 @@
-const cacheName = 'mood-tracker-v1.9'
+const cacheName = 'mood-tracker-v2'
 const contentToCache = [
   '/tracker/index.html',
   '/tracker/js/modules/db.js',
   '/tracker/js/modules/util.js',
+  '/tracker/js/modules/initsw.js',
   '/tracker/js/components/tracker.js',
   '/tracker/js/components/calendar.js',
+  '/tracker/js/components/footer.js',
+  '/tracker/js/components/header.js',
+  '/tracker/js/components/list.js',
+  '/tracker/js/views/kpis.js',
+  '/tracker/js/views/observationcalendar.js',
+  '/tracker/js/views/observations.js',
+  '/tracker/css/calendar.css',
+  '/tracker/css/dialog.css',
+  '/tracker/css/footer.css',
+  '/tracker/css/header.css',
+  '/tracker/css/list.css',
   '/tracker/css/main.css',
   '/tracker/img/favicon.svg',
   '/tracker/img/mask-icon.svg',
   '/tracker/img/apple-touch-icon.png',
-  '/tracker/img/google-touch-icon.png'
+  '/tracker/img/google-touch-icon.png',
+  '/tracker/html/info.html',
+  '/tracker/html/kpiadd.html',
+  '/tracker/html/kpis.html',
+  '/tracker/html/observationadd.html',
+  '/tracker/html/observationcalendar.html',
+  '/tracker/html/observationchart.html',
+  '/tracker/html/observations.html',
 ]
 
 // Install serviceworker
